@@ -16,7 +16,7 @@ function App() {
 
     setLoading(true);
     try {
-      const response = await fetch('http://localhost:3000/api/shorten', {
+      const response = await fetch('https://url-shortner-backend-wek9.onrender.com/api/shorten', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
