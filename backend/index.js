@@ -26,7 +26,8 @@ app.post('/api/shorten',async(req,res)=>{
          const shortUrl=nanoid(8);
          const url=new Url({originalUrl, shortUrl});
         await url.save();
-        return res.status(200).json({message:"URL GENERATED SUCCESSFULLY",url:url});
+        const baseUrl = process.env.BASE_URL || `https://${req.get('host')}`;
+        return res.status(200).json({message:"URL GENERATED SUCCESSFULLY",url:{...url.toObject(), shortUrl: `${baseUrl}/${shortUrl}`}});
     }catch(err){
         console.error(err);
         return res.status(500).json({error:'Server error'});
